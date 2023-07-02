@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "subastas-8f555": {
+      "hosting": {
+        "app": [
+          "subastas-8f555"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "subastas-8f555"
+  }
+}

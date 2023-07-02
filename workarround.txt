@@ -1,0 +1,60 @@
+ionic start app-subastas blank --type=angular
+cd app-subastas
+npm install @capacitor/splash-screen
+ionic cap add android
+ionic cap add ios
+ionic cap sync
+npx cordova-res android -skip-config -copy
+
+cd resources\android\icon
+copy drawable-mdpi-icon.png mdpi-foreground.png
+copy drawable-hdpi-icon.png hdpi-foreground.png
+copy drawable-xhdpi-icon.png xhdpi-foreground.png
+copy drawable-xxhdpi-icon.png xxhdpi-foreground.png
+copy drawable-xxxhdpi-icon.png xxxhdpi-foreground.png
+cd.. cd.. cd..
+
+conecta mobil usb
+
+npx cap sync
+ionic capacitor run android -l --external
+
+seguir pasos 
+https://medium.com/@simonescigliuzzi/how-to-add-icon-and-splash-screen-to-your-ionic-app-ccec37240934
+
+
+------
+creamos la bdd en firebase.
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyAlWPPBE2uLIzSobZ40uQvBIiIvK9cfVlE",
+  authDomain: "subastas-8f555.firebaseapp.com",
+  projectId: "subastas-8f555",
+  storageBucket: "subastas-8f555.appspot.com",
+  messagingSenderId: "953433927619",
+  appId: "1:953433927619:web:776bb4cd9a031c53519776"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+npm install firebase
+ng add @angular/fire
+ionic generate page login
+ionic generate page register
+ionic generate page admin
+ionic generate service services/auth
+ionic generate service services/avatar
+
+npm i @capacitor/camera
+npm i @ionic/pwa-elements
+
+
+
+
