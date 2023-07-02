@@ -1,0 +1,44 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Home
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">
+        <ion-icon slot="icon-only" name="log-out">Logout</ion-icon>
+      </ion-button>
+      <ion-button (click)="goProfile()">Perfil</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list class="list-custom animate__animated animate__fadeIn" lines="full" *ngIf="content_loaded">
+    <ion-card *ngFor="let auction of auctions">
+        <div class="title">
+          <ion-row>
+            <ion-text><b>{{auction.name}}</b></ion-text>
+          </ion-row>
+          <ion-text> <sub>Monica Boulevard, LA. {{auction.country}}</sub></ion-text>
+        </div>
+          <img  alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
+          
+          
+          <div class="subtitle">
+            <ion-row >
+              <b>APARTMENT</b>
+            </ion-row>
+              <ion-icon class="person" name="person"></ion-icon> 3
+              <ion-icon name="moon"></ion-icon> 2                           
+          </div>
+          <div class="sprice">
+           {{ auction.sprice }} €
+          </div>
+        
+        <div class="card-footer">
+           <ion-button size="small">Bid Now !</ion-button>
+        </div>  
+       
+    </ion-card>
+  </ion-list> 
+</ion-content>
