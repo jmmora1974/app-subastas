@@ -5,6 +5,7 @@ import { AlertController, LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AuctionService } from '../services/auction.service';
 import { Auction } from '../Models/auction';
+import { User } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +17,7 @@ export class HomePage {
   profile:any;
   auctions: Auction[]=[];
   id?:number;
+  valorPuja: any;
 
   content_loaded: boolean = false;
 
@@ -83,7 +85,53 @@ export class HomePage {
       this.router.navigateByUrl(`auctions/show/${id}`);
   } 
 
+  makeAuction (valor:any, auction: Auction){
+    
+    //console.log ("Puja ", auction.id, " a ", valor, userPuja.email);
+    auction.user_id_won=this.authService.userLogged();
+    auction.fprice=valor;
+    this.valorPuja=valor++;
+
+    console.log (auction);
+       
+
+   
+    if (!valor) {
+      //No deberia occurri por la propiedad disable de html del boton puja.
+      this.showAlert('Puja invalida', 'Por favor, debes introducir un precio a la subasta');
+      
+    }
+    
+    if (valor<=auction.fprice) {
+      //No deberia occurri por la propiedad disable de html del boton puja.
+      this.showAlert('Puja invalida', 'El precio de la puja ha de ser mayor al actual.');
+      
+    }else {
+
+      try {
+       
+        this.auctionService.update(auction)
+      
+      }
   
+  catch (error:any){
+      console.log ('error',error);
+    }
+
+    }
+
+  
+  }
+
+ async showAlert (header:string, message:string) {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+
 
 
 }

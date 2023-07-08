@@ -32,11 +32,17 @@
               <ion-icon name="moon"></ion-icon> 2                           
           </div>
           <div class="sprice">
-           {{ auction.sprice }} €
+           {{ auction.fprice }} €
+           {{auction.user_id_won}}
           </div>
         
         <div class="card-footer">
-           <ion-button size="small">Bid Now !</ion-button>
+          <ion-item >
+            <ion-text>Haz tu puja:   </ion-text>
+            <ion-input [(ngModel)]="valorPuja" type="number" placeholder="{{auction.fprice+1}}" fill="outline" width="40px" 
+                > </ion-input> 
+            <ion-button [disabled]="valorPuja<auction.sprice"  size="small" (click)="makeAuction(valorPuja, auction)">Puja</ion-button>
+          </ion-item>
         </div>  
        
     </ion-card>

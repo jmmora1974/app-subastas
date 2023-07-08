@@ -7,5 +7,6 @@ export interface Auction {
     description: string;
     sprice: number;
     fprice: number;
+    user_id_won: string;
     
 }
