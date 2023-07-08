@@ -25,3 +25,11 @@
 #container a {
   text-decoration: none;
 }
+
+.card-footer{
+  display: inline;
+  ion-input{
+    width: 60px;
+    justify-content: right;
+  }
+}

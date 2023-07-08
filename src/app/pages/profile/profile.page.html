@@ -1,6 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>profile</ion-title>
+    <ion-button routerLink="/">Home</ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -10,6 +11,23 @@
       <ion-title size="large">Perfil</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <form [formGroup]="formperfil" (ionSubmit)="actualizaPerfil()">    
+    <ion-item lines="full" class="item-has-focus ion-valid ion-invalid" >
+      <label slot="start">Email: </label>
+      <ion-input type="email" placeholder="Email" formControlName="email" ></ion-input>
+      
+    </ion-item> 
+    <ion-item lines="full" class="item-has-focus ion-touched ion-invalid" >
+      <ion-input type="password" placeholder="Contraseña" formControlName="password"></ion-input>
+      <ion-note slot="end" *ngIf="password!.dirty && password!.errors">Password invalid</ion-note>
+    </ion-item>
+
+    <ion-button expand="full" type="submit" [disabled]="formperfil.valid">Actualizar perfil</ion-button>
+    <ion-button expand="full" type="button" (click)="returnHome()">Volver a homer</ion-button>
+
+  </form>
+
   <div class="preview">
     <ion-avatar (click)="changeImage()">
       <img *ngIf="profile?.imageUrl; else placeholder_avatar;" [src]="profile.imageUrl" />

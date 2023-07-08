@@ -4,16 +4,34 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 import { Auction } from '../Models/auction';
+import { AlertController, LoadingController } from '@ionic/angular';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuctionService {
+  private auctionActual: Auction={
+    toLowerCase: '',
+    id: 0,
+    name: '',
+    address: '',
+    country: '',
+    description: '',
+    sprice: 0,
+    fprice: 0,
+    user_id_won: ''
 
+  };
   private apiURL = "http://localhost:8000/api/auction/";
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private alertController: AlertController,
+    private loadingController: LoadingController
+  ) { 
+    
+  }
 
   private getHeaders(): HttpHeaders {
     const headers = new HttpHeaders({
@@ -68,5 +86,23 @@ export class AuctionService {
     const headers = this.getHeaders();
     return this.http.delete<Auction>(this.apiURL + id , {headers});
   }
+
+  update (auction: Auction){
+    const headers = this.getHeaders();
+    const url = `${this.apiURL}${auction.id}`
+    console.log (this.http.post<Auction>(url, JSON.stringify(auction), {headers}));
+   return this.http.post<Auction>(url, JSON.stringify(auction), {headers});
+ 
+  }
+
+  async showAlert (header:string, message:string) {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+
 
 }
